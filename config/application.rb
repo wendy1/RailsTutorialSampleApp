@@ -61,5 +61,13 @@ module SampleApp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    #--- spork hack (see http://bit.ly/arY19y)
+    if Rails.env.test?
+       initializer :after=> :initialize_dependency_mechanism do
+        # Work around initializer in railties/lib/rails/applicaiton/bootstrap.rb
+        ActiveSupport::Dependencies.mechanism = :load
+      end
+    end
   end
 end
