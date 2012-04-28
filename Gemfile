@@ -37,6 +37,9 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+# add the gravatar img tag
+gem 'gravatar_image_tag', '0.1.0'
+
 group :development do
 	gem 'rspec-rails', '2.9.0'
 	gem 'annotate', '2.4.1.beta1' # 'annotate-models', '1.0.4'
@@ -46,4 +49,5 @@ group :test do
 	gem 'rspec', '2.9.0'
 	gem 'webrat', '0.7.1'
 	gem 'spork'
+	gem 'factory_girl_rails', '1.0'
 end
