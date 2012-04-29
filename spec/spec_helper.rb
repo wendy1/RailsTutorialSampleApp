@@ -70,6 +70,14 @@ RSpec.configure do |config|
   
   # --- spork hack (see http://bit.ly/arY19y)
   ActiveSupport::Dependencies.clear
+  
+  # ---- my helpers
+  
+  # after running test_sign_in, the current_user will not be nil, so signed_in? will be true
+  # use this for testing signing out
+  def test_sign_in(user)
+    controller.sign_in(user)
+  end
 end
 
 end
