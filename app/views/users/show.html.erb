@@ -4,6 +4,7 @@
 			<h1>
 				<%= gravatar_for @user %>
 				<%= @user.name %>
+				Admin? <%= @user.admin?.to_s %>
 			</h1>
 		</td>
 		<td class="sidebar round">
