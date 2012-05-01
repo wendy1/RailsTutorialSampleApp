@@ -12,10 +12,15 @@ describe UsersController do
         response.should redirect_to(signin_path)
         flash[:notice].should =~ /sign in/i
       end
-    
+      
+      it "should not have delete links" do
+         get :index
+         response.should_not have_selector("ul.users>li>a", 'data-method' => "delete")
+      end
+          
     end
     
-    describe "for signed-in users" do
+    describe "for signed-in users (not admins)" do
       
       before(:each) do
         @user = test_sign_in(Factory(:user))
@@ -44,6 +49,11 @@ describe UsersController do
           response.should have_selector("li", :content => user.name)
         end
       end
+           
+      it "should not have delete links" do
+         get :index
+         response.should_not have_selector("ul.users>li>a", 'data-method' => "delete")
+      end
       
       it "should paginate users" do
         get :index
@@ -53,6 +63,17 @@ describe UsersController do
         response.should have_selector("a", :href => "/users?page=2", :content=> "Next")
       end
       
+    end
+    
+    describe "for admin user" do
+
+      it "should have delete links" do
+        admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+        get :index
+        response.should have_selector("ul.users>li>a", 'data-method' => "delete")
+      end
+
     end
     
   end
