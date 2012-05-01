@@ -101,7 +101,13 @@ describe UsersController do
       get 'new'
       response.should have_selector("title", :content => "Sign up")
     end
-  
+
+    it "should not allow logged in users to access the page" do
+      test_sign_in(Factory(:user))
+      get :new
+      response.should redirect_to(root_path)
+    end  
+
   end
   
   describe "POST 'create'" do
@@ -126,6 +132,12 @@ describe UsersController do
         post :create, :user => @attr
         response.should render_template('new')
       end 
+      
+      it "should not allow logged in users to access the page" do
+        test_sign_in(Factory(:user))
+        get :new
+        response.should redirect_to(root_path)
+      end
       
     end
     
