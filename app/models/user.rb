@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
   
+  has_many :microposts, :dependent => :destroy
+  
   validates :name, :presence => { :message => "cannot be blank.  User was not saved"},
     :length => { :maximum => 50 }
     

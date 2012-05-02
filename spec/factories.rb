@@ -12,3 +12,13 @@ end
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
+
+# adding the associateion allows us to create posts bypassing mass assign restrictions 
+# and lets us set create_at, which ActiveRecord doesn't allow.  
+# Ex:
+#  @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago
+#  @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago
+Factory.define :micropost do |micropost|
+  micropost.content "Foo bar"
+  micropost.association :user
+end
