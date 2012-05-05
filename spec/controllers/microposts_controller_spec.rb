@@ -3,6 +3,10 @@ require 'spec_helper'
 describe MicropostsController do
   render_views
   
+  before(:each) do
+    @base_title = "Ruby on Rails Tutorial Sample App"
+  end
+  
   describe "access control" do
     
     it "should deny access to 'create'" do
@@ -100,5 +104,6 @@ describe MicropostsController do
     end
     
   end 
+
 
 end

@@ -6,7 +6,8 @@ describe Micropost do
     @attr = { :content => "value for content"}
   end
   
-  pending "should create a new instance given valid attributes - broken by validation added later in the book" do
+  it "should create a new instance given valid attributes" do
+    pending "broken by validation added later in the book"
     Micropost.create!(@attr)
   end
 
