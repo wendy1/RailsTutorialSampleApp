@@ -77,8 +77,15 @@ describe "micropost assciations" do
       @user.feed.include?(mp3).should be false
     end
     
+    it "should include the microposts of followed users" do
+      followed = Factory(:user, :email => Factory.next(:email))
+      mp3 = Factory(:micropost, :user => followed)
+      @user.follow!(followed)
+      @user.feed.should include(mp3)
+    end
+    
   end
-
+  
 end
 
 describe "password validations" do
