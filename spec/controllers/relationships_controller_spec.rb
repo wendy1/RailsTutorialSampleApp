@@ -30,6 +30,14 @@ describe RelationshipsController do
         response.should be_redirect
       end.should change(Relationship, :count).by(1)
     end
+    
+    it "should create a relationship using Ajax" do
+      lambda do
+        xhr :post, :create, :relationship => { :followed_id => @followed }
+        response.should be_success
+      end.should change(Relationship, :count).by(1)
+    end
+    
   end
   
   describe "Delete 'destroy'" do
